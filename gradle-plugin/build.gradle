@@ -1,0 +1,29 @@
+apply plugin: "java-gradle-plugin"
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "maven-publish"
+apply plugin: "kotlin-kapt"
+
+publishing {
+    repositories {
+        maven {
+            url = "$buildDir/repo"
+        }
+    }
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = "inspekt" // users will do `apply plugin: "inspekt"`
+            implementationClass = "inspekt.InspektGradlePlugin" // entry-point class
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$ktVersion"
+    // contains classes like Subplugin, SubpluginOption, etc
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin-api:$ktVersion"
+    compileOnly "com.google.auto.service:auto-service:1.0-rc4"
+    kapt "com.google.auto.service:auto-service:1.0-rc4"
+}

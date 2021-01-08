@@ -1,0 +1,24 @@
+buildscript {
+    ext.ktVersion = "1.4.10"
+    repositories {
+        mavenCentral()
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$ktVersion"
+        classpath 'com.android.tools.build:gradle:3.6.3'
+    }
+    subprojects {
+        apply plugin: "maven"
+        group = "inspekt"
+        version = "0.0.1"
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+        google()
+        maven { url 'https://jitpack.io' }
+    }
+}
